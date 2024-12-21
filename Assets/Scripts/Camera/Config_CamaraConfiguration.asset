@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea34a7cb430c3a240b5698e253605a3a, type: 3}
+  m_Name: Config_CamaraConfiguration
+  m_EditorClassIdentifier: 
+  fastSpeed: 5
+  normalSpeed: 1
+  scrollSpeed: 5
+  minHeight: 50
+  maxHeight: 400
+  movementTime: 0.2
+  rotationAmount: 10
+  zoomAmount: {x: 0, y: 1, z: -1}
