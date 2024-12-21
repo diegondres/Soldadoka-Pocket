@@ -35,7 +35,6 @@ public class GameController : Singleton<GameController>
     }
 
     public void ShowReglas(){
-        Debug.Log("is reglas active? " + reglas.activeSelf);
         if(reglas.activeSelf){
             reglas.SetActive(false);
             return;
