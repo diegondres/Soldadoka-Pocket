@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-
 public class DuelGround
 {
     public string biome;

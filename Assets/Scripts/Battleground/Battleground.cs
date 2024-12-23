@@ -11,6 +11,8 @@ public class Battleground : PersistentSingleton<Battleground>
     public GameObject DuelGroundAllies;
     public GameObject DuelGroundEnemies;
     public GameObject StartBattleButton;
+    public GameObject advanceButton;
+    private int activeGroundIndex = 0;
     void Start()
     {
         grounds = new List<DuelGround>();
@@ -46,7 +48,16 @@ public class Battleground : PersistentSingleton<Battleground>
             StartBattleButton.SetActive(true);
         }
     }
-    public void StartBattle(){
+    public void StartBattle()
+    {
         Debug.Log("Battle Started");
+        if (!advanceButton.activeSelf)
+        {
+            advanceButton.SetActive(true);
+        }
+    }
+    public DuelGround GetActiveGround()
+    {
+        return grounds[activeGroundIndex];
     }
 }

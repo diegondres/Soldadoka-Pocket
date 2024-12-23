@@ -11,7 +11,7 @@ public class Unidad : MonoBehaviour
     public bool isSelected;
     public Image bordes;
     public DuelGround duelGround;
-    public void SetSelected()
+    public void DisplayUnitInfo()
     {
         if (isAllied)
         {
@@ -21,14 +21,9 @@ public class Unidad : MonoBehaviour
         {
             EnemiesInfo.Instance.ShowInfoUnit(this);
         }
-        if (isSelected) return;
-
-        isSelected = true;
-        Battleground.Instance.AddToDuelGround(this);
-
     }
    
-    
+
     public class UnidadBuilder
     {
         private Unidad unidad;
