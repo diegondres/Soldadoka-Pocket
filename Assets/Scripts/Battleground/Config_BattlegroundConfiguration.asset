@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd41926442b07094b8820f702cf2d5cc, type: 3}
   m_Name: Config_BattlegroundConfiguration
   m_EditorClassIdentifier: 
-  size: 2
+  size: 3

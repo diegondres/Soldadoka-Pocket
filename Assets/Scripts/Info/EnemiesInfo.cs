@@ -30,7 +30,6 @@ public class EnemiesInfo : Singleton<EnemiesInfo>
 
     public void SelectDeselect()
     {
-        Debug.Log("SelectDeselect isSelected: " + lastUnidadSelected.isSelected);
         if (lastUnidadSelected.isSelected)
         {
             lastUnidadSelected.isSelected = false;
@@ -39,7 +38,6 @@ public class EnemiesInfo : Singleton<EnemiesInfo>
         }
         else
         {
-            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             lastUnidadSelected.isSelected = true;
             textSelectionButton.text = "Deselect";
             Battleground.Instance.AddToDuelGround(lastUnidadSelected);

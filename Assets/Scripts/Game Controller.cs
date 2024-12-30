@@ -13,9 +13,9 @@ public class GameController : Singleton<GameController>
     public GameObject reglas;
     protected override void Awake(){
         base.Awake();
-        int sizeArmys = UnityEngine.Random.Range(2, maxSizeArmys);
+        int sizeArmys = UnityEngine.Random.Range(Battleground.Instance.configuration.size, maxSizeArmys);
         CreateArmy(sizeArmys, AlliedField.transform);
-        sizeArmys = UnityEngine.Random.Range(2, maxSizeArmys);
+        sizeArmys = UnityEngine.Random.Range(Battleground.Instance.configuration.size, maxSizeArmys);
         CreateArmy(sizeArmys, EnemyField.transform, false);
     }
 
@@ -40,5 +40,8 @@ public class GameController : Singleton<GameController>
             return;
         }
         reglas.SetActive(true); 
+    }
+    public void DestroyElement(GameObject gameObject){
+        Destroy(gameObject);
     }
 }

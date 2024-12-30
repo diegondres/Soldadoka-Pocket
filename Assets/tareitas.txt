@@ -1,0 +1,3 @@
+- Tener distintos tipos de unidades
+- Hacer que se generen de forma aleatoria al comenzar la batalla
+- Implementar las reglas en base a las diferentes unidades.

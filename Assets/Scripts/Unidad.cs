@@ -7,6 +7,9 @@ public class Unidad : MonoBehaviour
     public string nombre;
     public int atk;
     public int def;
+    public int minValue = 0;
+    public int maxValue = 6;
+    public int fightCount = 0;
     public bool isAllied;
     public bool isSelected;
     public Image bordes;
@@ -21,8 +24,12 @@ public class Unidad : MonoBehaviour
         {
             EnemiesInfo.Instance.ShowInfoUnit(this);
         }
+        if (isSelected) return;
+        if (Battleground.Instance.battleStart) return;
+        Battleground.Instance.AddToDuelGround(this);
+
     }
-   
+
 
     public class UnidadBuilder
     {
