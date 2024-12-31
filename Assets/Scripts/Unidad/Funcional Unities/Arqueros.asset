@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a777005c94336df43a8fe0ab26643ea5, type: 3}
+  m_Name: Arqueros
+  m_EditorClassIdentifier: 
+  minAttack: 15
+  maxAttack: 75
+  minDeffense: 0
+  maxDeffense: 30
+  type: Archer
+  prebab: {fileID: 8814037135565002453, guid: 5bdf05d3b8779be4fb405bccc46f36fc, type: 3}

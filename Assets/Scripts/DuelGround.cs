@@ -22,8 +22,8 @@ public class DuelGround : MonoBehaviour
     public void CalculateResults()
     {
         CalculateStats();
-        int alliesNumber = UnityEngine.Random.Range(allied.minValue, allied.maxValue);
-        int enemiesNumber = UnityEngine.Random.Range(enemy.minValue, enemy.maxValue);
+        int alliesNumber = GetForceNumber(allied);
+        int enemiesNumber = GetForceNumber(enemy);
         Battleground.Instance.textAllies.text += "Fuerza aliado: " + alliesNumber + "\n";
         Battleground.Instance.textEnemies.text += "Fuerza enemigos: " + enemiesNumber + "\n";
         if (alliesNumber > enemiesNumber)
@@ -47,28 +47,68 @@ public class DuelGround : MonoBehaviour
     }
     private void CalculateStats()
     {
-        if (allied.atk > enemy.atk)
+        allied.RestartModValues();
+        enemy.RestartModValues();
+        CheckForDuels();
+        if (allied.attack > enemy.attack)
         {
-            allied.maxValue += 2;
+            allied.modMaxValue += 2;
         }
         else
         {
-            enemy.maxValue += 2;
+            enemy.modMaxValue += 2;
         }
-        if (allied.def > enemy.def)
+        if (allied.deffense > enemy.deffense)
         {
-            allied.minValue += 2;
+            allied.modMinValue += 2;
         }
         else
         {
-            enemy.minValue += 2;
+            enemy.modMinValue += 2;
         }
         allied.maxValue -= allied.fightCount;
         enemy.maxValue -= enemy.fightCount;
         allied.fightCount++;
         enemy.fightCount++;
-        Battleground.Instance.textAllies.text = "Min value: " + allied.minValue + " ;Max value: " + allied.maxValue + "\n";
-        Battleground.Instance.textEnemies.text = "Min value: " + enemy.minValue + " ;Max value: " + enemy.maxValue + "\n";
+        Battleground.Instance.textAllies.text = "Min value: " + allied.GetMinValue() + " ;Max value: " + allied.GetMaxValue() + "\n";
+        Battleground.Instance.textEnemies.text = "Min value: " + enemy.GetMinValue() + " ;Max value: " + enemy.GetMaxValue() + "\n";
+    }
+    private void CheckForDuels()
+    {
+        
+        if (allied.tipo == GlobalNames.infantry)
+        {
+            if (enemy.tipo == GlobalNames.archer)
+            {
+                enemy.lanzamientosExtras++;
+            }
+            else if(enemy.tipo == GlobalNames.cabalry){
+                
+            }
+        }
+        else if (allied.tipo == GlobalNames.lancers)
+        {
 
+        }
+        else if (allied.tipo == GlobalNames.archer)
+        {
+
+        }
+        else if (allied.tipo == GlobalNames.cabalry)
+        {
+        }
+    }
+
+    public int GetForceNumber(Unidad unidad)
+    {
+        int forceNumber = 0;
+
+        for (int i = 0; i < 1 + unidad.lanzamientosExtras; i++)
+        {
+            int generatedNumber = UnityEngine.Random.Range(allied.GetMinValue(), allied.GetMaxValue());
+            if (forceNumber < generatedNumber) forceNumber = generatedNumber;
+        }
+
+        return forceNumber;
     }
 }

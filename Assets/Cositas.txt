@@ -1,0 +1,10 @@
+Weas que he ido cachando:
+    - Cada lado (lugar donde se alojan las unidades de cada ejercito) deberian tener max 20 unidades
+    - 
+
+
+Core del juego:
+    - El azar siempre tiene que jugar un rol importante
+    - La estrategia tiene que dar gran ventaja sobre el azar.
+    - Tener varias chances de poder ganar, que no todo este perdido si es que te salen muy malos dados. Especialmente si estas haciendo bien las cosas
+    - Definir que es hacer bien las cosas.

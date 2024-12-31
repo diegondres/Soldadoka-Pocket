@@ -15,8 +15,8 @@ public class AlliesInfo : Singleton<AlliesInfo>
             selectionButton.SetActive(true);
         }
         alliesInfoText.text = $"Name: {unidad.name}\n" +
-                             $"Attack: {unidad.atk}\n" +
-                             $"Defense: {unidad.def}\n";
+                             $"Attack: {unidad.attack}\n" +
+                             $"Defense: {unidad.deffense}\n";
         lastUnidadSelected = unidad;
         if (unidad.isSelected)
         {
@@ -32,9 +32,11 @@ public class AlliesInfo : Singleton<AlliesInfo>
     {
         if (lastUnidadSelected.isSelected)
         {
+            lastUnidadSelected.duelGround.allied = null;
+            lastUnidadSelected.duelGround = null;
             lastUnidadSelected.isSelected = false;
             textSelectionButton.text = "Select";
-            lastUnidadSelected.transform.position = GameController.instance.AlliedField.transform.position + new Vector3(Random.Range(-300, 300), Random.Range(-300, 300));
+            lastUnidadSelected.transform.SetParent(GameController.instance.AlliedField.transform);
         }
         else
         {

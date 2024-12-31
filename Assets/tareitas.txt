@@ -1,3 +1,10 @@
+tareitas por hacer:
+- Implementar las reglas en base a las diferentes unidades.
+- hacer que cuando termine una pelea, vuelvan (los sobrevivientes) al campo de cada equipo y puedan ser seleccionables de nuevo.
+    - Una cosa importante. que las modificaciones de min max values se hagan en una variable distinta, cosa que sea temporal la modificacion
+
+
+tareitas promovidas a terminadas: 
 - Tener distintos tipos de unidades
 - Hacer que se generen de forma aleatoria al comenzar la batalla
-- Implementar las reglas en base a las diferentes unidades.
+    
