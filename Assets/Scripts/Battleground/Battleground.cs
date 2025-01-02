@@ -50,7 +50,6 @@ public class Battleground : Singleton<Battleground>
     }
     public void StartBattle()
     {
-        Debug.Log("Battle Started");
         battleStart = true;
         if (!advanceButton.activeSelf)
         {
@@ -66,11 +65,62 @@ public class Battleground : Singleton<Battleground>
         }
         else
         {
-            Debug.Log("Se ha acabado la batalla");
+            int alliesAlive = GameController.instance.allies.Count;
+            int enemiesAlive = GameController.instance.enemies.Count;
+            int lowerQuantity = alliesAlive < enemiesAlive ? alliesAlive : enemiesAlive;
+            if (alliesAlive == 0)
+            {
+                textAllies.text = "Perdiste";
+                textEnemies.text = "Ganó";
+                GameController.instance.EndGame(false);
+            }
+            else if (enemiesAlive == 0)
+            {
+                textAllies.text = "Ganaste";
+                textEnemies.text = "Perdió";
+                GameController.instance.EndGame(true);
+            }
+            else
+            {
+                textAllies.text = "La Batalla continua!!";
+                textEnemies.text = "La Batalla continua!!";
+                foreach (DuelGround ground in grounds)
+                {
+                    ground.battleEnded = false;
+                    if (ground.allied != null)
+                    {
+                        ground.allied.duelGround = null;
+                        ground.allied.isSelected = false;
+                        ground.allied.transform.SetParent(GameController.Instance.AlliedField.transform);
+                        ground.allied = null;
+                    }
+                    if (ground.enemy != null)
+                    {
+                        ground.enemy.duelGround = null;
+                        ground.enemy.isSelected = false;
+                        ground.enemy.transform.SetParent(GameController.Instance.EnemyField.transform);
+                        ground.enemy = null;
+                    }
+                }
+                battleStart = false;
+                advanceButton.SetActive(false);
+                activeGroundIndex = 0;
+                StartBattleButton.SetActive(false);
+                if (grounds.Count > lowerQuantity)
+                {
+                    for (int i = 0; i < grounds.Count; i++)
+                    {
+                        Destroy(grounds[i].gameObject);
+                    }
+                    grounds.Clear();
+                    for (int i = 0; i < lowerQuantity; i++)
+                    {
+                        GameObject duelground = Instantiate(prefabDuelGround, arena);
+                        grounds.Add(duelground.GetComponent<DuelGround>().SetInitialValues(i));
+                    }
+                }
+            }
         }
     }
-    public DuelGround GetActiveGround()
-    {
-        return grounds[activeGroundIndex];
-    }
+
 }

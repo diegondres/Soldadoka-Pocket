@@ -8,8 +8,13 @@ public class EnemiesInfo : Singleton<EnemiesInfo>
     private Unidad lastUnidadSelected;
     public TextMeshProUGUI textSelectionButton;
     public GameObject selectionButton;
+
     public void ShowInfoUnit(Unidad unidad)
     {
+        if (unidad == null) return;
+        if (lastUnidadSelected != null) lastUnidadSelected.bordes.color = Color.red;
+        unidad.bordes.color = Color.white;
+
         if (!selectionButton.activeSelf)
         {
             selectionButton.SetActive(true);
@@ -30,7 +35,7 @@ public class EnemiesInfo : Singleton<EnemiesInfo>
 
     public void SelectDeselect()
     {
-
+        if(lastUnidadSelected == null) return;
         if (lastUnidadSelected.isSelected)
         {
             lastUnidadSelected.duelGround.enemy = null;

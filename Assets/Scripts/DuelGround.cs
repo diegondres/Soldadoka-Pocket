@@ -29,14 +29,14 @@ public class DuelGround : MonoBehaviour
         Battleground.Instance.textEnemies.text += "Fuerza enemigos: " + enemiesNumber + "\n";
         if (alliesNumber > enemiesNumber)
         {
-            GameController.Instance.DestroyElement(enemy.gameObject);
+            GameController.Instance.DestroyUnidad(enemy);
             enemy = null;
             Battleground.Instance.textAllies.text += "Gana el aliado!!!!!";
         }
         else if (enemiesNumber > alliesNumber)
         {
-            GameController.Instance.DestroyElement(allied.gameObject);
-            enemy = null;
+            GameController.Instance.DestroyUnidad(allied);
+            allied = null;
             Battleground.Instance.textEnemies.text += "Gana el Enemigo!!!!!";
         }
         else
