@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Utils;
 
-public class Battleground : PersistentSingleton<Battleground>
+public class Battleground : Singleton<Battleground>
 {
     public BattlegroundConfiguration configuration;
     public List<DuelGround> grounds;
@@ -23,7 +22,7 @@ public class Battleground : PersistentSingleton<Battleground>
         for (int i = 0; i < configuration.size; i++)
         {
             GameObject duelground = Instantiate(prefabDuelGround, arena);
-            grounds.Add(duelground.GetComponent<DuelGround>());
+            grounds.Add(duelground.GetComponent<DuelGround>().SetInitialValues(i));
         }
     }
 
