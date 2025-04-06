@@ -1,3 +1,21 @@
+Recomendacion: Siento tuyo el juego, no puede haber codigo que no entiendas totalmente
+
+Cositas del 03-04-25:
+    Core del juego:
+        La idea es tener un pequeño reino, e ir expandiendose con un ejercito primero, quizas despues lograr tener mas ejercitos.
+        Batallas:
+        - Cada ejercito deberia estar compuesto por maximo 20 unidades, habrian X clases (infanteria, caballo, arquero, piquero, etc)
+        - Ademas cada unidad debe tener un nombre, experiencia, quizas un lore (no obligatorio) y el conteo de cuantos ha matado.
+        - Idealmente me gustaria que fuesen subiendo de nivel, con que se hagan mas fuerte me basta
+        - Deberia haber una lista de no mas de 10 aspectos a valorar para definir a una unidad. Y que con eso, mas la clase se definan los duelos.
+        - El azar siempre tiene que ser parte, pero la estrategia deberia ganarle al azar al final
+        Resto del juego:
+        - Deberia ser un mapa dividido en regiones
+        - Uno comienza con una o dos regiones
+        - Se tienen ejercitos que se pueden mover hacia regiones extranjeras para conquistarlos
+        - Los enemigos deberian poseer varias regiones. Y al menos 1 castillo en alguna de sus regiones
+        - 
+
 tareitas por hacer:
 - Implementar las reglas en base a las diferentes unidades.
 - hacer que cuando termine una pelea, vuelvan (los sobrevivientes) al campo de cada equipo y puedan ser seleccionables de nuevo.
