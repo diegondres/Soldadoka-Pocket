@@ -4,123 +4,62 @@ using UnityEngine;
 
 public class Camara : MonoBehaviour
 {
-    public GameObject cameraCiybuilder;
     [SerializeField]
-    private CamaraConfiguration config;
-    private Camera camarita;
-    private float movementSpeed;
-    private Vector3 newZoom;
-
+    private float movementSpeed = 10f; // Velocidad de movimiento
     [SerializeField]
-    private Vector3 newPosition;
-    private Vector3 dragStartPosition;
-    private Vector3 dragCurrentPosition;
+    private float scrollSpeed = 5f; // Velocidad de movimiento en el eje Z con el scroll
+    [SerializeField]
+    private float smoothTime = 0.2f; // Tiempo de suavizado para el movimiento
 
-    public void Awake()
+    private Vector3 targetPosition; // Posición objetivo de la cámara
+    private Vector3 velocity = Vector3.zero; // Velocidad para suavizar el movimiento
+
+    private void Awake()
     {
-        newZoom = cameraCiybuilder.transform.localPosition;
-        camarita = FindAnyObjectByType<Camera>();
+        targetPosition = transform.position; // Inicializar la posición objetivo
     }
 
-    void Update()
+    private void Update()
     {
         HandleMovementInput();
-        HandleMouseInput();
-    }
-
-    public void HandleMouseInput()
-    {
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            newZoom += Input.mouseScrollDelta.y * config.GetScrollSpeed() * config.GetZoomAmount();
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            Plane plane = new(Vector3.up, Vector3.zero);
-            Ray ray = camarita.ScreenPointToRay(Input.mousePosition);
-            if (plane.Raycast(ray, out float entry))
-            {
-                dragStartPosition = ray.GetPoint(entry);
-            }
-        }
-        if (Input.GetMouseButton(0))
-        {
-            Plane plane = new(Vector3.up, Vector3.zero);
-            Ray ray = camarita.ScreenPointToRay(Input.mousePosition);
-            if (plane.Raycast(ray, out float entry))
-            {
-                dragCurrentPosition = ray.GetPoint(entry);
-                newPosition = transform.position + dragStartPosition - dragCurrentPosition;
-            }
-        }
+        HandleScrollInput();
+        SmoothMove();
     }
 
     private void HandleMovementInput()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            movementSpeed = config.GetFastSpeed();
-        }
-        else
-        {
-            movementSpeed = config.GetNormalSpeed();
-        }
+        // Movimiento en los ejes X y Y con WASD o flechas
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            newPosition += transform.forward * movementSpeed;
+            targetPosition += movementSpeed * Time.deltaTime * Vector3.up;
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            newPosition += transform.forward * -movementSpeed;
-        }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            newPosition += transform.right * movementSpeed;
+            targetPosition += movementSpeed * Time.deltaTime * - Vector3.up;
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            newPosition += transform.right * -movementSpeed;
+            targetPosition += movementSpeed * Time.deltaTime * Vector3.left;
         }
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            newZoom += config.GetZoomAmount();
+            targetPosition += movementSpeed * Time.deltaTime * Vector3.right;
         }
-        if (Input.GetKey(KeyCode.F))
-        {
-            newZoom -= config.GetZoomAmount();
-        }
-
-        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * config.GetMovementTime());
-        cameraCiybuilder.transform.localPosition = Vector3.Lerp(cameraCiybuilder.transform.localPosition, newZoom, Time.deltaTime * config.GetMovementTime());
-        CheckZoomLimits();
     }
 
-    public void SetPosition(Vector3 position)
+    private void HandleScrollInput()
     {
-        transform.position = position;
-        newPosition = position;
+        // Movimiento en el eje Z con el scroll del mouse
+        float scrollDelta = Input.mouseScrollDelta.y;
+        if (scrollDelta != 0)
+        {
+            targetPosition += scrollDelta * scrollSpeed * Time.deltaTime * Vector3.forward;
+        }
     }
 
-    private void CheckZoomLimits()
+    private void SmoothMove()
     {
-        if (cameraCiybuilder.transform.localPosition.y < config.GetMinHeight())
-        {
-            Vector3 newLocalPosition = cameraCiybuilder.transform.localPosition;
-            newLocalPosition.y = config.GetMinHeight();
-            newLocalPosition.z = -config.GetMinHeight();
-            cameraCiybuilder.transform.localPosition = newLocalPosition;
-            newZoom -= config.GetZoomAmount();
-
-        }
-        if (cameraCiybuilder.transform.localPosition.y > config.GetMaxHeight())
-        {
-            Vector3 newLocalPosition = cameraCiybuilder.transform.localPosition;
-            newLocalPosition.y = config.GetMaxHeight();
-            newLocalPosition.z = -config.GetMaxHeight();
-            cameraCiybuilder.transform.localPosition = newLocalPosition;
-            newZoom += config.GetZoomAmount();
-        }
+        // Suavizar el movimiento hacia la posición objetivo
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
     }
-
-
 }
